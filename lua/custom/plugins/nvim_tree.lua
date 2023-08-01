@@ -5,6 +5,11 @@
 return {
 	{
 		"nvim-tree/nvim-tree.lua",
+		opts = {
+			git = {
+				enable = false,
+			}
+		},
 		config = function()
 			vim.keymap.set("n", "<leader>n", ":NvimTreeFocus<CR>", { silent = true })
 		end

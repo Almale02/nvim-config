@@ -39,6 +39,23 @@ return {
         local client = vim.lsp.get_client_by_id(client_id)
         local bufnr = args.buf
 
+        -- disable formatting for files which name has a substring from the suspend_list. not counted file extendsion
+        local file_path = vim.api.nvim_buf_get_name(bufnr)
+        local file_name = vim.fn.fnamemodify(file_path, ":t")
+
+        local str = string.match(file_name, "^(.-)%.")
+        local suspend_list = { "system" }
+
+
+        for _, value in ipairs(suspend_list) do
+          if string.match(string.lower(str), value) then
+            return
+          end
+          --if value == string.lower(str) then
+          -- return
+          --end]]
+        end
+
         -- Only attach to clients that support document formatting
         if not client.server_capabilities.documentFormattingProvider then
           return
@@ -70,6 +87,5 @@ return {
         })
       end,
     })
-
   end,
 }

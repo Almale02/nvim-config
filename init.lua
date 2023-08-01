@@ -25,7 +25,8 @@ Kickstart Guide:
 I have left several `:help X` comments throughout the init.lua
 You should run that command and read that help section for more information.
 
-In addition, I have some `NOTE:` items throughout the file.
+In addition, I have some `NOTE:`
+items throughout the file.
 These are for you, the reader to help understand what is happening. Feel free to delete
 them once you know what you're doing, but they should serve as a guide for when you
 are first encountering a few different constructs in your nvim config.
@@ -213,12 +214,25 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
-  require 'custom.plugins.init',
+  --require 'custom.plugins.init',
 }, {})
 
 require("nvim-tree").setup()
 require("lspconfig").tsserver.setup {}
-
+require('lspconfig').rust_analyzer.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+  end,
+  settings = {
+    ["rust-analyzer"] = {
+      inlayHints = {
+        typeHints = true,
+        parameterHints = true,
+        chainingHints = true,
+      }
+    }
+  }
+}
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -421,7 +435,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
