@@ -5,7 +5,7 @@ return {
 		signs = 1,
 		keywords = {
 			TODO = { icon = " ", color = "info" },
-			NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+			INFO = { icon = " ", color = "hint", alt = { "NOTE" } },
 			WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
 			SECTION = { icon = " ", color = "test" },
 		}

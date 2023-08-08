@@ -5,13 +5,14 @@
 return {
 	{
 		"nvim-tree/nvim-tree.lua",
-		opts = {
-			git = {
-				enable = false,
-			}
-		},
 		config = function()
-			vim.keymap.set("n", "<leader>n", ":NvimTreeFocus<CR>", { silent = true })
+			require("nvim-tree").setup({
+				git = {
+					enable = false,
+				}
+			})
+			vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>", { silent = true })
+			print("fasfsdf")
 		end
 	}
 }
